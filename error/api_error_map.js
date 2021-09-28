@@ -1,4 +1,4 @@
-import apiErrorCode from './api_error_code';
+const apiErrorCode = require('./api_error_code');
 const ApiErrorMap = new Map();
 ApiErrorMap.set(apiErrorCode.NOT_FOUND_ERROR, { code: apiErrorCode.NOT_FOUND_ERROR, message: '未找到该接口' });
 ApiErrorMap.set(apiErrorCode.USER_ACCOUNT_ERROR, {

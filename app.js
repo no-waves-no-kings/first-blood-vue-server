@@ -8,6 +8,7 @@ const logger = require('koa-logger');
 const log4js = require('./utils/log4js');
 const responseformatter = require('./middleware/response_formatter');
 const { apiPrefix } = require('./config');
+require('./dbhelper/db');
 
 const index = require('./routes/index');
 const users = require('./routes/users');

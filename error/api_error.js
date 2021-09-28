@@ -1,5 +1,5 @@
-import apiErrorMap from './api_error_map';
-import apiErrorCode from './api_error_code';
+const apiErrorMap = require('./api_error_map');
+const apiErrorCode = require('./api_error_code');
 class ApiError extends Error {
   constructor(code, message) {
     super();

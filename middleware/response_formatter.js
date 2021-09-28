@@ -1,7 +1,7 @@
-import ApiError from '../error/api_error';
-import ApiErrorCode from '../error/api_error_code';
-import ApiErrorMap from '../error/api_error_map';
-import { success, error } from '../utils/utils';
+const ApiError = require('../error/api_error');
+const ApiErrorCode = require('../error/api_error');
+const ApiErrorMap = require('../error/api_error_map');
+const { success, error } = require('../utils/utils');
 const responseFormatter = (apiPrefix) => async (ctx, body) => {
   if (ctx.request.path.startsWith(apiPrefix)) {
     try {
