@@ -2,9 +2,10 @@ const ApiError = require('../error/api_error');
 const ApiErrorCode = require('../error/api_error');
 const ApiErrorMap = require('../error/api_error_map');
 const { success, error } = require('../utils/utils');
-const responseFormatter = (apiPrefix) => async (ctx, body) => {
+const responseFormatter = (apiPrefix) => async (ctx, next) => {
   if (ctx.request.path.startsWith(apiPrefix)) {
     try {
+      console.log(ctx.request.path);
       await next();
       if (ctx.response.status === 404) {
         throw new ApiError(ApiErrorCode.NOT_FOUND_ERROR);

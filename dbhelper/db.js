@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const config = require('../config');
 const log4js = require('../utils/log4js');
 mongoose.Promise = global.Promise;
-log4js.info(config);
 mongoose.connect(config.database, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

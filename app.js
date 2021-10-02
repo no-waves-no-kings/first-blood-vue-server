@@ -9,10 +9,7 @@ const log4js = require('./utils/log4js');
 const responseformatter = require('./middleware/response_formatter');
 const { apiPrefix } = require('./config');
 require('./dbhelper/db');
-
-const index = require('./routes/index');
-const users = require('./routes/users');
-
+const routers = require('./routes');
 // error handler
 onerror(app);
 
@@ -42,8 +39,7 @@ app.use(async (ctx, next) => {
 });
 
 // routes
-app.use(index.routes(), index.allowedMethods());
-app.use(users.routes(), users.allowedMethods());
+app.use(routers.routes(), routers.allowedMethods());
 
 // error-handling
 app.on('error', (err, ctx) => {
