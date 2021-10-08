@@ -1,17 +1,26 @@
 const user = require('../dbhelper/user');
-const ApiError = require('../error/api_error');
-const ApiErrorCode = require('../error/api_error_code');
 
 exports.login = async (ctx) => {
   const body = ctx.request.body;
-  const res = await user.findOne(body);
-  console.log(res);
-  if (!res) {
-    throw new ApiError(ApiErrorCode.USER_ACCOUNT_ERROR);
-  }
-  ctx.body = body;
+  ctx.body = await user.findOne(body);
 };
 
-exports.test = async (ctx) => {
-  ctx.body = 123;
+exports.listPage = async (ctx) => {
+  const param = ctx.request.query;
+  ctx.body = await user.findList(param);
+};
+
+exports.delete = async (ctx) => {
+  const param = ctx.request.body;
+  ctx.body = await user.delete(param);
+};
+
+exports.update = async (ctx) => {
+  const param = ctx.request.body;
+  ctx.body = await user.update(param);
+};
+
+exports.save = async (ctx) => {
+  const param = ctx.request.body;
+  ctx.body = await user.save(param);
 };

@@ -7,7 +7,8 @@ const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const log4js = require('./utils/log4js');
 const responseformatter = require('./middleware/response_formatter');
-const { apiPrefix } = require('./config');
+const { apiPrefix, secret } = require('./config');
+const koajwt = require('koa-jwt');
 require('./dbhelper/db');
 const routers = require('./routes');
 // error handler
@@ -19,17 +20,16 @@ app.use(
     enableTypes: ['json', 'form', 'text'],
   }),
 );
-app.use(responseformatter(apiPrefix));
 app.use(json());
 app.use(logger());
 app.use(require('koa-static')(__dirname + '/public'));
-
+app.use(koajwt({ secret }).unless({ path: [/^\/api\/users\/login/] }));
 app.use(
   views(__dirname + '/views', {
     extension: 'pug',
   }),
 );
-
+app.use(responseformatter(apiPrefix));
 // logger
 app.use(async (ctx, next) => {
   const start = new Date();

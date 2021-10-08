@@ -12,7 +12,7 @@ const CODE = {
   AUTH_ERROR: 40001,
 };
 module.exports = {
-  pager(pageNum = 1, pageSize = 10) {
+  pager({ pageNum = 1, pageSize = 10 }) {
     pageNum *= 1;
     pageSize *= 1;
     const skipIndex = (pageNum - 1) * pageSize;

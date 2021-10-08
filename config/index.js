@@ -10,10 +10,11 @@ const envConfig = {
   },
   prod: {
     port: 3000,
-    database: 'mongodb://root:123456@122.51.167.40:27017/first-blood-vue?authSource=datebase&authMechanism=SCRAM-SHA-1',
+    database: '',
   },
 };
 module.exports = {
   apiPrefix: '/api',
   ...envConfig[env],
+  secret: 'seth919',
 };

@@ -3,9 +3,9 @@ const mongoosePaginate = require('mongoose-paginate');
 const mongooseUniqueValidator = require('mongoose-unique-validator');
 const userSchema = new mongoose.Schema(
   {
-    userId: Number,
+    userId: { type: Number, unique: true, required: [true, 'userId必填'] },
     userName: { type: String, unique: true, required: [true, '用户名必填'] },
-    userPwd: String,
+    userPwd: { type: String, select: false },
     userMobile: String,
     userEmail: { type: String, required: [true, '邮箱必填'] },
     state: {
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
     deptId: [],
   },
   {
-    timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' },
+    timestamps: { createdAt: 'createdTime', updatedAt: 'updatedTime' },
   },
 );
 userSchema.pre('findOneAndUpdate', function () {

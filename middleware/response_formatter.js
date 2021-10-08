@@ -1,5 +1,5 @@
 const ApiError = require('../error/api_error');
-const ApiErrorCode = require('../error/api_error');
+const ApiErrorCode = require('../error/api_error_code');
 const ApiErrorMap = require('../error/api_error_map');
 const { success, error } = require('../utils/utils');
 const responseFormatter = (apiPrefix) => async (ctx, next) => {
@@ -13,8 +13,11 @@ const responseFormatter = (apiPrefix) => async (ctx, next) => {
         ctx.body = success(ctx.body);
       }
     } catch (e) {
+      console.log(e);
       if (e instanceof ApiError) {
         ctx.body = error(e.message, e.code);
+      } else if (e.status === 401) {
+        ctx.body = error(ApiErrorMap.get(ApiErrorCode.NO_AUTH_ERROR), ApiErrorCode.NO_AUTH_ERROR);
       } else {
         ctx.response.body = error(ApiErrorMap.get(ApiErrorCode.UNKNOWN_ERROR), ApiErrorCode.UNKNOWN_ERROR);
       }
